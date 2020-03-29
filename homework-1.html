@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    function calcVowels(str) { // функция подсчета глассных букв в строке str
+
+      var vowels = ["а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я"];
+      var count = 0;
+
+      for (let i = 0; i < str.length; i++) {
+        if (vowels.includes(str[i].toLowerCase())) {
+          count++;
+        }
+      };
+      return count;
+    }
+
+    do {
+      var str = prompt('Введите строку:');
+      var countVowel = 0;
+
+      if (str) {
+        countVowel = calcVowels(str);
+        if (countVowel !== 0) {
+          alert('Количество гласных букв: ' + countVowel);
+        } else {
+          alert('В строке нет гласных букв');
+        }
+      } else {
+        alert('Строка пуста!');
+      };
+    } while (str); // повторяем пока пользователь не нажмет 'Отмена'
+
+  </script>
+</body>
+
+</html>
