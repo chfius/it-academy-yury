@@ -7,7 +7,83 @@
 </head>
 <body>
   <script>
-    
+
+    function isCorrect(str) {
+      // фунцкия проверяет корректность строки:
+      // 1) в строке что-то должно быть записано
+      // 2) длина должна быть более 1 символа и более
+      // 3) в строке не должно быть цифр
+      // 4) строка не должна содержать пробелов
+
+      var badSymbols = ['~', '№', ';', '%', ':', '?', '&', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')',
+        '|', '/', '-', '+', '<', '>', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+      var corr = true;
+
+      if ((str) && (str.length > 1)) {
+        for (let i = 0; i < str.length; i++) {
+          if (badSymbols.includes(str[i])) {
+            //if (parseInt(str[i]) || str[i] == ' ') {
+            corr = false;
+            break; // если нашли число или пробел, то возвращем false
+          }
+        };
+        return corr;
+      } else {
+        return false;
+      }
+    }
+
+    var userName = userPatronymic = userLastName = '';
+    var age = days = 0;
+    var sex, pension;
+
+    while (!isCorrect(userLastName)) { // запрашиваем корректные данные
+      userLastName = prompt('Введите ваше фамилию');
+      if (!isCorrect(userLastName)) {
+        alert('Введены некорректные данные!');
+      }
+    };
+
+    while (!isCorrect(userName)) {     // запрашиваем корректные данные
+      userName = prompt('Введите ваше имя', '');
+      if (!isCorrect(userName)) {
+        alert('Введены некорректные данные!');
+      }
+    };
+
+    while (!isCorrect(userPatronymic)) {  // запрашиваем корректные данные
+      userPatronymic = prompt('Введите ваше отчество', '');
+      if (!isCorrect(userName)) {
+        alert('Введены некорректные данные!');
+      }
+    };
+
+    // на всякий случай приведем первую букву к врхнему регистру
+    userLastName = userLastName[0].toUpperCase() + userLastName.slice(1);
+    userName = userName[0].toUpperCase() + userName.slice(1);
+    userPatronymic = userPatronymic[0].toUpperCase() + userPatronymic.slice(1);
+
+    while (age <= 0 || age > 120 || isNaN(age)) { // проверка на корректность возраста >0 и <120
+      age = prompt('Введите ваш возраст');
+      if (age <= 0 || age > 120 || isNaN(age)) {
+        alert('Введены некорректные данные!');
+      }
+    }
+
+    days = 365 * age;
+    sex = confirm('Ваш пол мужской?');
+
+    if (sex) { // определяем: на пенсии ли человек
+      pension = (age - 62) > 0; // для мужчины
+    } else {
+      pension = (age - 57) > 0; // для женщины
+    }
+
+    // выводим анкету
+    alert('ваше ФИО: ' + userLastName + ' ' + userName + ' ' + userPatronymic + '\nваш возраст в годах: '
+      + age + '\nваш возраст в днях: ' + days + '\nчерез 5 лет вам будет: ' + (parseInt(age) + 5) +
+      '\nваш пол: ' + (sex ? 'мужской' : 'женский') + '\nвы на пенсии: ' + (pension ? 'да' : 'нет'));
+
   </script>
 </body>
 </html>
