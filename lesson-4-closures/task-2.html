@@ -8,7 +8,28 @@
 </head>
 
 <body>
+  <script>
+    'use strict';
 
+    var obj = {
+      className: 'my menu menu'
+    };
+
+    function removeExistClassName(obj, cls) {
+      var classNamesArray = obj.className.split(' ');
+      var resultClassNames = [];
+
+      for (var str of classNamesArray) {
+        if (str !== cls) {
+          resultClassNames.push(str);
+        }
+      }
+      obj.className = resultClassNames.join(' ');
+    }
+
+    removeExistClassName(obj, 'menu');
+    console.log(obj.className);
+  </script>
 </body>
 
 </html>
