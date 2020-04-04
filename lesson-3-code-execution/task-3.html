@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task-3</title>
+</head>
+
+<body>
+  <script>
+    var str = [];
+    var symbol = 0;
+    var summ = 0;
+
+    while (!isNaN(symbol) && symbol !== '') {
+      symbol = prompt('Введите число:') || '';
+      if (!isNaN(symbol) && symbol !== '') {
+        str.push(Number(symbol));
+      };
+    };
+
+    for (var i = 0; i < str.length; i++) {
+      summ += str[i];
+    };
+
+    console.log(summ);
+  </script>
+</body>
+
+</html>
