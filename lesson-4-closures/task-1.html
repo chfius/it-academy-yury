@@ -8,7 +8,29 @@
 </head>
 
 <body>
+  <script>
+    'use strict';
 
+    var size = 8;  //размер решетки [size X size]
+    var str = '';
+
+    function drawLine(symblols, elementCounts) {
+      var line = '';
+
+      for (var i = 0; i < elementCounts; i++) {
+        line += symblols[i % 2]; //если не четное, то сохраняем в строку 1-ый символ, если четное - 2ой
+      }
+      return line + '\n';
+    }
+
+    for (let i = 0; i < size; i++) {
+      if (!(i % 2)) {
+        str += drawLine(['#', ' '], size);
+      } else { str += drawLine([' ', '#'], size); }
+    }
+
+    console.log(str);
+  </script>
 </body>
 
 </html>
