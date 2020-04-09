@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task-2</title>
+</head>
+
+<body>
+  <script>
+    'use strict';
+
+    var obj = {
+      className: 'my menu menu'
+    };
+
+    function removeExistClassName(obj, cls) {
+      var classNamesArray = obj.className.split(' ');
+      var resultClassNames = [];
+
+      for (var str of classNamesArray) {
+        if (str !== cls) {
+          resultClassNames.push(str);
+        }
+      }
+      obj.className = resultClassNames.join(' ');
+    }
+
+    removeExistClassName(obj, 'menu');
+    console.log(obj.className);
+  </script>
+</body>
+
+</html>

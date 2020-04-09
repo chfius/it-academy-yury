@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task-1</title>
+</head>
+
+<body>
+  <script>
+    'use strict';
+
+    var size = 8;  //размер решетки [size X size]
+    var str = '';
+
+    function drawLine(symblols, elementCounts) {
+      var line = '';
+
+      for (var i = 0; i < elementCounts; i++) {
+        line += symblols[i % 2]; //если нечетное, то сохраняем в строку 1-ый символ, если четное - 2ой
+      }
+      return line + '\n';
+    }
+
+    for (let i = 0; i < size; i++) {
+      if (!(i % 2)) { //для нечетных строк выводим сперва '#', для четных выводим вначале ' '
+        str += drawLine(['#', ' '], size);
+      } else {
+        str += drawLine([' ', '#'], size);
+      }
+    }
+
+    console.log(str);
+  </script>
+</body>
+
+</html>
