@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task-1</title>
+</head>
+
+<body>
+  <script>
+    'use strict';
+
+    var familyJohn = {
+      bills: [124, 48, 268, 180, 42],
+      tips: [],
+      tipsCalc: function () {
+        this.bills.forEach(item => {
+          if (item <= 50) { this.tips.push(item * 0.2) };
+          if (item > 50 && item <= 200) { this.tips.push(item * 0.15) };
+          if (item > 200) { this.tips.push(item * 0.1) };
+        });
+        return this.tips;
+      },
+      paids: [],
+      paidsCalc: function () {
+        for (let i = 0; i < this.bills.length; i++) {
+          this.paids.push(this.bills[i] + this.tips[i]);
+        }
+        return this.paids;
+      }
+    };
+
+    var familyMark = {
+      bills: [77, 375, 110, 45],
+      tips: [],
+      tipsCalc: function () {
+        this.bills.forEach(item => {
+          if (item <= 100) { this.tips.push(item * 0.2) };
+          if (item > 100 && item <= 300) { this.tips.push(item * 0.1) };
+          if (item > 300) { this.tips.push(item * 0.25) };
+        });
+        return this.tips;
+      },
+      paids: [],
+      paidsCalc: function () {
+        for (let i = 0; i < this.bills.length; i++) {
+          this.paids.push(this.bills[i] + this.tips[i]);
+        }
+        return this.paids;
+      }
+    };
+
+    function averageCalc(arr) {
+      var sum = 0;
+      for (var i = 0; i < arr.length; i++) {
+        sum += arr[i];
+      };
+      return sum !== 0 ? sum / arr.length : 0;
+    }
+
+    if (averageCalc(familyJohn.tipsCalc()) > averageCalc(familyMark.tipsCalc())) {
+      console.log('John and his family paid the highest tips on average')
+    } else if (averageCalc(familyJohn.tipsCalc()) < averageCalc(familyMark.tipsCalc())) {
+      console.log('Mark and his family paid the highest tips on average')
+    } else { console.log('Tips on average are equal') }
+  </script>
+</body>
+
+</html>
