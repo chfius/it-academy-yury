@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task-3</title>  
+</head>
+
+<body>
+  <script>
+    'use strict';
+
+    var arr = ['воз', 'киборг', 'корсет', 'ЗОВ', 'гробик', 'костер', 'сектор'];
+
+    function anClean(arr) {
+
+      function isAnagram(test, original) {
+        var t = test.toLowerCase().split('').sort().join('');
+        var o = original.toLowerCase().split('').sort().join('');
+        return (t == o) ? true : false;
+      }
+
+      for (var i = 0; i < arr.length - 1; i++) {
+        for (var j = i + 1; j < arr.length; j++) {
+          if (isAnagram(arr[i], arr[j])) {
+            arr.splice(j, 1);
+            j--;
+          }
+        }
+      }
+      return arr;
+    }
+
+    console.log(anClean(arr)); // 'воз,киборг,корсет' или 'ЗОВ,гробик,сектор'
+  </script>
+</body>
+
+</html>
