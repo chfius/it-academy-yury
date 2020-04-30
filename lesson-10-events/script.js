@@ -1,3 +1,5 @@
+var titleForm = 'Для внесения вашего сайта в каталог, заполните форму:';
+var nameForm = 'dynForm';
 var descriptionForm = [
   { elemtype: 'text', label: 'Разработчики:', width: 400 },
   { elemtype: 'text', label: 'Название сайта:', width: 400 },
@@ -11,8 +13,6 @@ var descriptionForm = [
   { elemtype: 'textarea', label: 'Описание сайта:', width: 550, height: 150 },
   { elemtype: 'submit', label: 'Опубликовать', width: 100 },
 ];
-var nameForm = 'dynForm';
-var titleForm = 'Для внесения вашего сайта в каталог, заполните форму:';
 
 function buildForm(arrParams, nameForm) {
   var formSelectorOld = document.getElementsByName(nameForm)[0];
