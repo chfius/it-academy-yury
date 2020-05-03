@@ -15,9 +15,8 @@ var nameForm = 'dynForm';
 var titleForm = 'Для внесения вашего сайта в каталог, заполните форму:';
 
 function buildForm(arrParams, nameForm) {
-  var formSelectorOld = document.forms[0];
-  var formSelector = formSelectorOld.cloneNode();
-  formSelector.name = nameForm;
+  var formSelectorOld = document.forms[nameForm];
+  var formSelector = formSelectorOld.cloneNode();  
 
   var spansStyle = 'display: block; float: left; width: 150px;';
   var newSpan = function (textLabel) {
