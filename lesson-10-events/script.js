@@ -1,3 +1,5 @@
+'use strict';
+
 var descriptionForm = [
   { elemtype: 'text', label: 'Разработчики:', width: 400 },
   { elemtype: 'text', label: 'Название сайта:', width: 400 },
@@ -16,7 +18,7 @@ var titleForm = 'Для внесения вашего сайта в катало
 
 function buildForm(arrParams, nameForm) {
   var formSelectorOld = document.forms[nameForm];
-  var formSelector = formSelectorOld.cloneNode();  
+  var formSelector = formSelectorOld.cloneNode(true);  
 
   var spansStyle = 'display: block; float: left; width: 150px;';
   var newSpan = function (textLabel) {
