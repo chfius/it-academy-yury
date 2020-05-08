@@ -35,7 +35,7 @@
       EO.preventDefault();
       dragImage = EO.target;
       dragImage.style.zIndex = 1000;
-      dragImage.style.position = 'absolute';
+      //dragImage.style.position = 'absolute';
       dragImage.style.cursor = 'pointer';
       DragShiftX = EO.pageX - dragImage.getBoundingClientRect().left;
       DragShiftY = EO.pageY - dragImage.getBoundingClientRect().top;
@@ -53,9 +53,7 @@
       dragImage.removeEventListener('mouseup', dragStop);
       dragImage.style.zIndex = 0;
       dragImage.style.cursor = 'default';
-      dragImage = null;
-      DragShiftX = 0;
-      DragShiftY = 0;
+      dragImage = null;      
     }
   </script>
 </body>
