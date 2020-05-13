@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Drag&Drop</title>
+</head>
+
+<body>
+  <div>
+    <img id="pic1"
+      src="https://images.pexels.com/photos/33044/sunflower-sun-summer-yellow.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+      alt="img1">
+    <img id="pic2" src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2018/02/propose-1517999844.jpg"
+      alt="img2">
+    <img id="pic3" src="https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg" alt="img3">
+  </div>
+
+  <script>
+    'use strict';
+
+    var dragImage = null;
+    var DragShiftX;
+    var DragShiftY;
+
+    document.body.addEventListener('mousedown', dragStart);
+
+    var images = document.getElementsByTagName('img');
+    for (var i = 0; i < images.length; i++) {
+      images[i].style.position = 'absolute';
+    }
+
+    function dragStart(EO) {
+      EO = EO || window.event;
+      EO.preventDefault();
+      dragImage = EO.target;
+      dragImage.style.zIndex = 1000;
+      //dragImage.style.position = 'absolute';
+      dragImage.style.cursor = 'pointer';
+      DragShiftX = EO.pageX - dragImage.getBoundingClientRect().left;
+      DragShiftY = EO.pageY - dragImage.getBoundingClientRect().top;
+      document.addEventListener('mousemove', dragMove);
+      dragImage.addEventListener('mouseup', dragStop);
+    }
+
+    function dragMove(EO) {
+      dragImage.style.left = EO.pageX - DragShiftX + "px";
+      dragImage.style.top = EO.pageY - DragShiftY + "px";
+    }
+
+    function dragStop(EO) {
+      document.removeEventListener('mousemove', dragMove);
+      dragImage.removeEventListener('mouseup', dragStop);
+      dragImage.style.zIndex = 0;
+      dragImage.style.cursor = 'default';
+      dragImage = null;      
+    }
+  </script>
+</body>
+
+</html>
