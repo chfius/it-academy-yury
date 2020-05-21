@@ -40,8 +40,8 @@ function drawFaceClock() {
   clockCircle.setAttribute("cx", radiusClock);
   clockCircle.setAttribute("cy", radiusClock);
   clockCircle.setAttribute("r", radiusClock);
-  clockCircle.setAttribute("stroke", "red");
-  clockCircle.setAttribute("fill", "rgb(206, 184, 73)");
+  //clockCircle.setAttribute("stroke", "red");
+  clockCircle.setAttribute("fill", "#FCCA66");
   return clockCircle;
 }
 
@@ -62,7 +62,7 @@ function drawDigitsRadius(x, y) {
   digitCircle.setAttribute("cx", x);
   digitCircle.setAttribute("cy", y);
   digitCircle.setAttribute("r", radiusDigits);
-  digitCircle.setAttribute("fill", "green");
+  digitCircle.setAttribute("fill", "#48B382");
   return digitCircle;
 }
 
