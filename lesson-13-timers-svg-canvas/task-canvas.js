@@ -4,6 +4,7 @@ const radiusClock = 150; // радиус часов
 const numbersRadius = radiusClock - 20; //радиус оси цифр циферблата
 const radiusDigits = 15; // радиус цифр
 const sizeDigits = 15; // размер цифр
+const sizeDigitalClock = 25; //размер шрифта цифровых часов
 
 var center = radiusClock;
 var canvas = document.getElementById('clock');
@@ -11,6 +12,7 @@ var context = canvas.getContext('2d');
 var currSecAngle = 0;
 var currMinAngle = 0;
 var currHourAngle = 0;
+var currTimeStr;
 
 drawClock();
 startClock();
@@ -23,7 +25,7 @@ function drawClock() {
   drawFaceClock();
 
   // цифровая строка времени
-  //clockWraper.appendChild(drawDigitalClock('time_string'));
+  drawDigitalClock();
 
   // рисуем малые окуржности часов циферблата
   for (var i = 1; i <= 12; i++) {
@@ -37,7 +39,7 @@ function drawClock() {
   // рисуем стрелки часов
   drawArrow(radiusClock - 70, 6, "black", currHourAngle); //минутная стрелка
   drawArrow(radiusClock - 40, 4, "black", currMinAngle); //минутная стрелка
-  drawArrow(radiusClock - 20, 2, "red", currSecAngle);   //секундная стрелка  
+  drawArrow(radiusClock - 20, 2, "red", currSecAngle);   //секундная стрелка
 }
 
 function drawFaceClock() {
@@ -45,6 +47,12 @@ function drawFaceClock() {
   context.beginPath();
   context.arc(center, center, radiusClock, 0, Math.PI * 2, false);
   context.fill();
+}
+
+function drawDigitalClock() {
+  context.fillStyle = 'black';
+  context.font = `normal ${sizeDigitalClock}px Arial`;
+  context.fillText(currTimeStr, radiusClock - 50, radiusClock - 50);
 }
 
 function drawDigitsRadius(x, y) {
@@ -61,21 +69,20 @@ function drawDigits(x, y, n) {
 }
 
 function drawArrow(size, width, color, angle) {
+  var moveX = center + size * Math.cos(Math.PI / 2 - angle * (Math.PI / 180));
+  var moveY = center - size * Math.sin(Math.PI / 2 - angle * (Math.PI / 180));
+
   context.strokeStyle = color;
   context.lineWidth = width;
   context.lineCap = 'round';
-
-  context.translate(center, center);
-  context.rotate(angle * Math.PI / 180); //поворот стрелки на текущий угол
-  context.translate(-center, -center);
-
   context.beginPath();
   context.moveTo(center, center);
-  context.lineTo(center, center - size);
+  context.lineTo(moveX, moveY);
   context.stroke();
+  context.closePath();
 }
 
-/*   ------------- Tik Tak ------------------- */
+/*   ------------- ход часов ------------------- */
 
 function startClock() {
   setInterval(updateTime, 1000);
@@ -85,15 +92,13 @@ function startClock() {
     var currSec = currTime.getSeconds();
     var currMin = currTime.getMinutes();
     var currHour = currTime.getHours();
-    var currTimeStr = formatTime(currTime);
-    //document.getElementById('time_string').innerHTML = currTimeStr;
+    currTimeStr = formatTime(currTime);
 
     //движение стрелок
-    currSecAngle = 360 * (currSec / 60) - 60;
-    currMinAngle = 360 * (currMin / 60) - 125;
+    currSecAngle = 360 * (currSec / 60);
+    currMinAngle = 360 * (currMin / 60);
     currHourAngle = 360 * (currHour % 12) / 12 + currMin / 2;
-    console.log(currSecAngle, currMinAngle);
-    drawClock();    
+    drawClock();
   }
 
   function formatTime(DT) {
