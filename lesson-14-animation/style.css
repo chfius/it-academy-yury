@@ -3,9 +3,10 @@
 }
 
 #score {
-  left: 48%;
+  left: 44%;
   display: inline;
   position: absolute;
+  font-size: 30px;
 }
 
 .field {
