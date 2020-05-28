@@ -3,7 +3,6 @@
 const sizeFieldX = 400; // размер поля
 const sizeFieldY = 300; // размер поля
 const ballSize = 30; // размер игрового мяча
-const speed = 5; // первоначальная скорость мяча
 const sizeRacketX = 10; // ширина ракетки
 const sizeRacketY = 100; // длина ракетки
 const k = 20; //дельта, на которую еще считается, что мяч попал по ракетке
@@ -175,8 +174,8 @@ function start() {
   }
   ballInCenter();
   // направление движения мяча в начале игры - случайное
-  ball.speedX = random(-speed, speed);
-  ball.speedY = random(-speed, speed);
+  ball.speedX = random(-5, 5);
+  ball.speedY = random(-2, 2);
 }
 
 function stopGame(playerWin) {
