@@ -4,50 +4,48 @@
 <head>
   <meta charset="UTF-8">
   <title>DRINKS</title>
-  <script src="HashStorage.js"></script>
+  <script src="LocalStorage.js"></script>
   <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="description">
-    <p class="description_text" id="name">Напиток: </p>
-    <p class="description_text" id="alcohol">Алкогольный: </p>
-    <p class="description_text" id="prescription">Рецепт приготовления: </p>
-  </div>
-  <div class="buttons">
-    <button id="input_item_info">Ввод информации о напитке</button>
-    <button id="get_item_info">Получение информации о напитке</button>
-    <button id="del_item">Удаление информации о напитке</button>
-    <button id="get_items_names">Перечень всех напитков</button>
+  <div class="alcohol">
+    <p id="alcohol_name">Напиток: </p>
+    <p id="is_alcohol">Алкогольный: </p>
+    <p id="alcohol_prescription">Рецепт приготовления: </p>
+    <div class="buttons">
+      <button id="alcohol_input_item_info">Ввод информации о напитке</button>
+      <button id="alcohol_get_item_info">Получение информации о напитке</button>
+      <button id="alcohol_del_item">Удаление информации о напитке</button>
+      <button id="alcohol_get_items_names">Перечень всех напитков</button>
+    </div>
   </div>
 
   <script>
-    'use strict';
+    var drinkStorage = new TLocalStorage('drinks');
+    drinkStorage.Reset();
 
-    var drinkStorage = new HashStorage();
-
-    var nameText = document.getElementById('name');
-    var alcoholText = document.getElementById('alcohol');
-    var prescriptionText = document.getElementById('prescription');
-
-
-    const btnInputNewItem = document.getElementById('input_item_info');
+    const btnInputNewItem = document.getElementById('alcohol_input_item_info');
     btnInputNewItem.addEventListener('click', function () {
       var nameDrink = prompt('Введите название напитка:') || '';
-
-      drinkStorage.AddValue(nameDrink, (function () {
-        var newItem = {
-          isAlcohol: confirm('Напиток алкогольный?'),
-          prescription: prompt('Напишите рецепт приготовления:') || ''
-        };
-        return newItem;
-      }()));
+      if (nameDrink) {
+        drinkStorage.AddValue(nameDrink, (function () {
+          var newItem = {
+            isAlcohol: confirm('Напиток алкогольный?'),
+            prescription: prompt('Напишите рецепт приготовления:') || ''
+          };
+          return newItem;
+        }()));
+      };
     });
 
-    const btnGetInfo = document.getElementById('get_item_info');
+    const btnGetInfo = document.getElementById('alcohol_get_item_info');
     btnGetInfo.addEventListener('click', function () {
       var nameDrink = prompt('Введите название напитка:') || '';
       var foundItem = drinkStorage.GetValue(nameDrink);
+      var nameText = document.getElementById('alcohol_name');
+      var alcoholText = document.getElementById('is_alcohol');
+      var prescriptionText = document.getElementById('alcohol_prescription');
 
       if (foundItem) {
         nameText.textContent = 'Напиток: ' + nameDrink;
@@ -59,15 +57,18 @@
 
     });
 
-    const btnDeleteItem = document.getElementById('del_item');
+    const btnDeleteItem = document.getElementById('alcohol_del_item');
     btnDeleteItem.addEventListener('click', function () {
       var itemDel = prompt('Введите название удаляемого напитка:') || '';
       (drinkStorage.DeleteValue(itemDel)) ? alert('Удалено') : alert('Напитка с таким названием не найдено!');
     })
 
-    const btnGetNames = document.getElementById('get_items_names');
+    const btnGetNames = document.getElementById('alcohol_get_items_names');
     btnGetNames.addEventListener('click', function () {
       var keys = drinkStorage.GetKeys();
+      var nameText = document.getElementById('alcohol_name');
+      var alcoholText = document.getElementById('is_alcohol');
+      var prescriptionText = document.getElementById('alcohol_prescription');
 
       if (keys) {
         nameText.textContent = 'Список напитков: ' + (keys.join(', '));
