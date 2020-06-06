@@ -1,6 +1,6 @@
 'use strict';
 
-var dishStorage = new TLocalStorage('dishes');
+var dishStorage = new TAJAXStorage('dishes');
 dishStorage.Reset();
 
 document.getElementById('dish_input_item_info').addEventListener('click', function () {
@@ -40,7 +40,7 @@ document.getElementById('dish_get_items_names').addEventListener('click', functi
   var nameText = document.getElementById('dish_name');
   var prescriptionText = document.getElementById('dish_prescription');
 
-  if (keys) {
+  if (keys.length) {
     nameText.textContent = 'Список блюд: ' + (keys.join(', '));
     prescriptionText.textContent = '';
   } else {
