@@ -1,0 +1,19 @@
+.wrapper {
+  text-align: center;
+}
+
+.wrapper p {
+  text-align: justify;
+  text-indent: 1.5em;
+}
+
+p.article_text {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.article_menu {
+  float: left;
+  width: max-content;
+  height: 500px;
+  margin-right: 20px;
+}
