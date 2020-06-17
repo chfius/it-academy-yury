@@ -1,5 +1,8 @@
 'use strict';
 
+window.onhashchange = switchToStateFromURLHash;
+switchToStateFromURLHash();
+
 function switchToStateFromURLHash() {
   var urlHash = window.location.hash;
   var SPAstate = {};
@@ -15,11 +18,12 @@ function switchToStateFromURLHash() {
   switch (SPAstate.pagename) {
     case 'main':
       pageHTML += '<h1 class="title" id="title">Энциклопедиа</h1>';
-      pageHTML += '<a class="contents" id="contents" href="/">список статей здесь</a>';
+      pageHTML +=
+        '<a class="contents" id="contents" href="/" onclick="switchToContents(event)">список статей здесь</a>';
       break;
     case 'contents':
       pageHTML += '<h1 class="title" id="title">Оглавление</h1>';
-      pageHTML += '<a id="article" href="/">статья 1</a>';
+      pageHTML += '<a id="article" href="/" onclick="switchToArticle(event)">статья 1</a>';
       break;
     case 'article':
       pageHTML += '<h1 class="title" id="title">Гродно</h1>';
@@ -33,15 +37,17 @@ function switchToState(newState) {
   location.hash = encodeURIComponent(JSON.stringify(newState));
 }
 
-window.onhashchange = switchToStateFromURLHash;
-switchToStateFromURLHash();
+function switchToMain(event) {
+  event.preventDefault();
+  switchToState({ pagename: 'main' });
+}
 
-document.getElementById('contents').addEventListener(
-  'click',
-  (e) => {
-    e.preventDefault();
-    switchToState({ pagename: 'contents' });
-  },
-  false,
-);
-//TODO продолжить с 'contents'
+function switchToContents(event) {
+  event.preventDefault();
+  switchToState({ pagename: 'contents' });
+}
+
+function switchToArticle(event) {
+  event.preventDefault();
+  switchToState({ pagename: 'article' });
+}
