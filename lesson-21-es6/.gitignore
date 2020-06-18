@@ -1,2 +1,3 @@
-other/.editorconfig
-other/prettier.config.js
+.editorconfig
+prettier.config.js
+csscomb.json

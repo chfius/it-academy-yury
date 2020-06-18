@@ -3,6 +3,8 @@
 window.onhashchange = switchToStateFromURLHash;
 switchToStateFromURLHash();
 
+var loadedArticle = "";
+
 function switchToStateFromURLHash() {
   var urlHash = window.location.hash;
   var SPAstate = {};
@@ -23,11 +25,20 @@ function switchToStateFromURLHash() {
       break;
     case "contents":
       pageHTML += '<h1 class="title" id="title">Оглавление</h1>';
-     // pageHTML += makeContents();
+      pageHTML += "<div>";
+      for (var title in articles.list) {
+        pageHTML += `<a id='article' href="articles/${articles.list[title]}.html" onclick="switchToArticle(event)">${title}</a>`;
+      }
+      pageHTML += "</div>";
       break;
     case "article":
-      pageHTML += '<h1 class="title" id="title">Гродно</h1>';
-      pageHTML += '<p class="article_text">Текст статьи</p>';
+      pageHTML += "<ul class='article_menu'>";
+      for (var title in articles.list) {
+        pageHTML += `<li><a href="articles/${articles.list[title]}.html" onclick="switchToArticle(event)">${title}</a></li>`;
+      }
+      pageHTML += "</ul>";
+      pageHTML += `<h1 class="title" id="title">${articles.titleLoadedArticle}</h1>`;
+      pageHTML += `<p class="article_text">${articles.HTMLLoadedArticle}</p>`;
       break;
   }
   document.getElementById("wrapper").innerHTML = pageHTML;
@@ -49,5 +60,6 @@ function switchToContents(event) {
 
 function switchToArticle(event) {
   event.preventDefault();
+  articles.loadArticle(event.target.textContent);
   switchToState({ pagename: "article" });
 }
