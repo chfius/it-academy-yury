@@ -25,7 +25,7 @@ let articles = {
     $.ajax(`articles/${this.list[title]}.html`, {
       type: "GET",
       async: false,
-      dataType: "text",
+      dataType: "html",
       cache: false,
       success: (data) => {
         this.titleLoadedArticle = title;
