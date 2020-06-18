@@ -3,8 +3,6 @@
 window.onhashchange = switchToStateFromURLHash;
 switchToStateFromURLHash();
 
-var loadedArticle = "";
-
 function switchToStateFromURLHash() {
   var urlHash = window.location.hash;
   var SPAstate = {};
@@ -16,6 +14,7 @@ function switchToStateFromURLHash() {
     SPAstate = { pagename: "main" };
   }
 
+  articles.init(pathToListArticles);
   var pageHTML = "";
   switch (SPAstate.pagename) {
     case "main":
@@ -60,6 +59,18 @@ function switchToContents(event) {
 
 function switchToArticle(event) {
   event.preventDefault();
-  articles.loadArticle(event.target.textContent);
-  switchToState({ pagename: "article" });
+
+  let titleArticle = event.target.textContent;
+  let pathToArticle = event.target.href;
+  $.ajax(pathToArticle, {
+    // проверим есть ли файл на диске?
+    type: "HEAD",
+    error: () => {
+      alert("Файл не найден!");
+    },
+    success: () => {
+      articles.loadArticle(titleArticle);
+      switchToState({ pagename: "article" });
+    },
+  });
 }

@@ -2,29 +2,29 @@
 
 const pathToListArticles = "articles/articles_list.json"; //список статей энциклопедии
 
-function Articles() {
-  this.list = {}; // список статей
-  this.titleLoadedArticle = null; // название текущей загруженной статьи
-  this.HTMLLoadedArticle = null; // содержание текущей загруженной статьи
-
-  this.init = function (pathLoad) {
+let articles = {
+  list: {}, // список статей
+  titleLoadedArticle: null, // название текущей загруженной статьи
+  HTMLLoadedArticle: null, // содержание текущей загруженной статьи
+  init(pathLoad) {
     $.ajax(pathLoad, {
       type: "GET",
       dataType: "json",
+      async: false,
       cache: false,
       success: (data) => {
-        this.list = data;
+        this.list = data; // загрузим список статей
       },
       error: (jqXHR, StatusStr, ErrorStr) => {
         alert(StatusStr + " " + ErrorStr);
       },
     });
-  };
-
-  this.loadArticle = function (title) {
-    var articlePath = `articles/${this.list[title]}.html`;
-
-    $.ajax(articlePath, {
+    // и сразу инициализируем первую статью
+    let firstArticle = Object.keys(this.list)[0];
+    this.loadArticle(firstArticle);
+  },
+  loadArticle(title) {
+    $.ajax(`articles/${this.list[title]}.html`, {
       type: "GET",
       async: false,
       dataType: "html",
@@ -37,8 +37,5 @@ function Articles() {
         alert(StatusStr + " " + ErrorStr);
       },
     });
-  };
-}
-
-var articles = new Articles();
-articles.init(pathToListArticles); // загружаем список статей
+  },
+};
