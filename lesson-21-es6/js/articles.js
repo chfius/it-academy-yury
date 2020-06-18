@@ -10,7 +10,7 @@ let articles = {
     $.ajax(pathLoad, {
       type: "GET",
       dataType: "json",
-      async: false,
+      async: false, //выкл синхронность, ждем полной загрузки
       cache: false,
       success: (data) => {
         this.list = data; // загрузим список статей
@@ -19,15 +19,13 @@ let articles = {
         alert(StatusStr + " " + ErrorStr);
       },
     });
-    // и сразу инициализируем первую статью
-    let firstArticle = Object.keys(this.list)[0];
-    this.loadArticle(firstArticle);
+    this.sortList(); // сразу запишем отсортированный массив
   },
   loadArticle(title) {
     $.ajax(`articles/${this.list[title]}.html`, {
       type: "GET",
       async: false,
-      dataType: "html",
+      dataType: "text",
       cache: false,
       success: (data) => {
         this.titleLoadedArticle = title;
@@ -37,5 +35,9 @@ let articles = {
         alert(StatusStr + " " + ErrorStr);
       },
     });
+  },
+  sortedList: [],
+  sortList() {
+    this.sortedList = Object.keys(this.list).sort();
   },
 };
