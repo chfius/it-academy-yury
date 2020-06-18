@@ -14,7 +14,7 @@ function switchToStateFromURLHash() {
     SPAstate = { pagename: "main" };
   }
 
-  articles.init(pathToListArticles);
+  articles.load(pathToListArticles);
   var pageHTML = "";
   switch (SPAstate.pagename) {
     case "main":

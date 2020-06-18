@@ -6,7 +6,7 @@ let articles = {
   list: {}, // список статей
   titleLoadedArticle: null, // название текущей загруженной статьи
   HTMLLoadedArticle: null, // содержание текущей загруженной статьи
-  init(pathLoad) {
+  load(pathLoad) {
     $.ajax(pathLoad, {
       type: "GET",
       dataType: "json",
